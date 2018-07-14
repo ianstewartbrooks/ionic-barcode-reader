@@ -1,0 +1,26 @@
+<ion-header>
+
+  <ion-navbar color="secondary">
+    <ion-title>history ({{count}})</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <p>Here is a list of all the codes scanned so far</p>
+  <ion-list>
+    <ion-item *ngFor="let code of barcodes">
+      <ion-grid>
+        <ion-row>
+          <ion-col width-50>
+            {{code.text}}
+          </ion-col>
+          <ion-col width-50>
+            {{code.format}}
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ion-item>
+  </ion-list>
+</ion-content>

@@ -1,0 +1,32 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <ion-title>Results</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+  <h3>Scan results:</h3>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-50>
+        Text
+      </ion-col>
+      <ion-col width-50>
+        {{results.text}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col width-50>
+        Format
+      </ion-col>
+      <ion-col width-50>
+        {{results.format}}
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <button ion-button navPop>Go Back</button>
+</ion-content>

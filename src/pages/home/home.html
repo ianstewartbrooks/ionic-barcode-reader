@@ -1,14 +1,40 @@
 <ion-header>
-  <ion-navbar>
+  <ion-navbar color="primary">
     <ion-title>
-      Ionic Blank
+      Ionic Barcode Scanner
     </ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
-  The world is your oyster.
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will be your guide.
-  </p>
+  <div *ngIf="results">
+    <h3>Results:</h3>
+    <ion-grid>
+      <ion-row>
+        <ion-col width-50>
+          Text
+        </ion-col>
+        <ion-col width-50>
+          {{results.text}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width-50>
+          Format
+        </ion-col>
+        <ion-col width-50>
+          {{results.format}}
+        </ion-col>
+      </ion-row>
+      <ion-row>
+        <ion-col width-50>
+          Cancelled Scan?
+        </ion-col>
+        <ion-col width-50>
+          {{results.cancelled}}
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </div>
+  <button ion-button (click)="scanBarcode()">Scan Barcode</button>
 </ion-content>
