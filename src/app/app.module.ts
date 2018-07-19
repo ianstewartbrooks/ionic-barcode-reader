@@ -6,23 +6,42 @@ import { StatusBar } from "@ionic-native/status-bar";
 import { BarcodeScanner } from "@ionic-native/barcode-scanner";
 
 import { MyApp } from "./app.component";
-import { HomePage } from "../pages/home/home";
 import { ScanPage } from "../pages/scan/scan";
-import { ResultsPage } from "../pages/results/results";
 import { TabsPage } from "../pages/tabs/tabs";
 import { HistoryPage } from "../pages/history/history";
-import { BarcodeService } from "../services/barcode-scanner.service";
+
+// Import and setup firebase firestore
+// Create yourself a firebase credentials file in this directory and
+// copy in your firebase config with the following layout:
+//
+// export const firebaseCredentials = {
+//   firebase: {
+//       apiKey: "YOUR_API_KEY",
+//   authDomain: "YOUR_AUTH_DOMAINm",
+//   databaseURL: "YOUR_DATABASE_URL",
+//   projectId: "YOUR_PROJECT_IDr",
+//   storageBucket: "YOUR_STORAGE_BUCKETm",
+//   messagingSenderId: "YOUR_MESSAGING_SENDER_ID"
+//   }
+// }
+
+import { firebaseCredentials } from "./firebase.credentials";
+import firebase from "firebase";
+
+firebase.initializeApp(firebaseCredentials.firebase);
+firebase.firestore().settings({
+  timestampsInSnapshots: true
+});
 
 @NgModule({
-  declarations: [MyApp, ScanPage, ResultsPage, TabsPage, HistoryPage],
+  declarations: [MyApp, ScanPage, TabsPage, HistoryPage],
   imports: [BrowserModule, IonicModule.forRoot(MyApp)],
   bootstrap: [IonicApp],
-  entryComponents: [MyApp, ScanPage, ResultsPage, TabsPage, HistoryPage],
+  entryComponents: [MyApp, ScanPage, TabsPage, HistoryPage],
   providers: [
     StatusBar,
     SplashScreen,
     BarcodeScanner,
-    BarcodeService,
     { provide: ErrorHandler, useClass: IonicErrorHandler }
   ]
 })

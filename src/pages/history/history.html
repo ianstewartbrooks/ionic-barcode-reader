@@ -1,7 +1,7 @@
 <ion-header>
 
-  <ion-navbar color="secondary">
-    <ion-title>history ({{count}})</ion-title>
+  <ion-navbar color="primary">
+    <ion-title>Scan History</ion-title>
   </ion-navbar>
 
 </ion-header>
@@ -10,17 +10,31 @@
 <ion-content padding>
   <p>Here is a list of all the codes scanned so far</p>
   <ion-list>
+    <ion-item>
+      <ion-row>
+        <ion-col>
+          Barcode
+        </ion-col>
+        <ion-col>
+          Status
+        </ion-col>
+        <ion-col>
+          Date
+        </ion-col>
+      </ion-row>
+    </ion-item>
     <ion-item *ngFor="let code of barcodes">
-      <ion-grid>
-        <ion-row>
-          <ion-col width-50>
-            {{code.text}}
-          </ion-col>
-          <ion-col width-50>
-            {{code.format}}
-          </ion-col>
-        </ion-row>
-      </ion-grid>
+      <ion-row>
+        <ion-col>
+          {{code.data().barcode }}
+        </ion-col>
+        <ion-col>
+          {{code.data().status }}
+        </ion-col>
+        <ion-col>
+          {{ code.data().updated_date.toDate() | date: 'dd/MM/yy HH:mm' }}
+        </ion-col>
+      </ion-row>
     </ion-item>
   </ion-list>
 </ion-content>

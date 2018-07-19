@@ -1,7 +1,7 @@
 <ion-header>
   <ion-navbar color="primary">
     <ion-title>
-      Scan Barcode ({{count}})
+      Scan Barcode
     </ion-title>
   </ion-navbar>
 </ion-header>
@@ -9,11 +9,33 @@
 <ion-content padding>
 
   <div>
-    <h4>Use the below button to scan a barcode into the system.
+    <h4>Use the below button to scan a bar/QR code into the system.
     </h4>
-    <button ion-button (click)="scanBarcode()">Scan Barcode</button>
+    <div text-center>
+      <button ion-button (click)="scanBarcode()" class="scan-button" large>Scan Barcode</button>
+    </div>
+
+    <p *ngIf="message" class="message">{{ message }}</p>
   </div>
-  <div *ngIf="message">
-    <h3>{{message}}</h3>
+  <div class="scan-results" *ngIf="scannedBarcode.barcode">
+    <h3>latest Scan Results</h3>
+    <ion-row>
+      <ion-col>
+        Barcode
+      </ion-col>
+      <ion-col>
+        {{scannedBarcode.barcode}}
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        Status
+      </ion-col>
+      <ion-col>
+        {{scannedBarcode.status}}
+      </ion-col>
+    </ion-row>
   </div>
+
+
 </ion-content>

@@ -1,34 +1,39 @@
-import { Component, OnInit } from "@angular/core";
-import { IonicPage, NavController, NavParams } from "ionic-angular";
-
-import { BarcodeService } from "../../services/barcode-scanner.service";
-import { iBarcode } from "../../interface/barcode.interface";
+import { Component } from "@angular/core";
+import { IonicPage } from "ionic-angular";
+import firebase from "firebase";
 
 @IonicPage()
 @Component({
   selector: "page-history",
   templateUrl: "history.html"
 })
-export class HistoryPage implements OnInit {
-  barcodes: iBarcode[] = [];
-  count: number = 0;
+export class HistoryPage {
+  barcodes: any[] = [];
+  uid: string;
 
-  constructor(
-    private barcodeService: BarcodeService,
-    public navCtrl: NavController,
-    public navParams: NavParams
-  ) {}
+  constructor() {}
 
-  // ionViewDidLoad() {
-  //   console.log("ionViewDidLoad HistoryPage");
-  // }
-  ionViewWillEnter() {
-    this.barcodes = this.barcodeService.getBarcodes();
-    this.count = this.barcodes.length;
+  async ionViewWillEnter() {
+    this.barcodes = await this.getAllBarcodes();
   }
 
-  ngOnInit() {
-    // this.barcodes = this.barcodeService.getBarcodes();
-    // this.count = this.barcodes.length;
+  getAllBarcodes(): any {
+    // Get all barcodes to show on history page
+    console.log("getting barcodes");
+    let dbBarcodes: any[] = [];
+    firebase
+      .firestore()
+      .collection("barcodes")
+      .orderBy("updated_date", "desc")
+      .get()
+      .then(docs => {
+        docs.forEach(doc => {
+          dbBarcodes.push(doc);
+        });
+        this.barcodes = dbBarcodes;
+      })
+      .catch(err => {
+        console.log(err);
+      });
   }
 }
